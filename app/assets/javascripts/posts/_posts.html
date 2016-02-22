@@ -1,0 +1,23 @@
+<div class="page-header">
+	<span><a href="/home">Back to Home</a></span>
+	<h3> {{post.title}} </h3>
+</div>
+
+<div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
+	<ul class="vote-panel">
+		<li><span class="glyphicon glyphicon-thumbs-up vote" ng-click="upVote(comment)"></span></li>
+		<li>{{comment.upvotes}} - by {{comment.author}}</li>
+		<li><span class="glyphicon glyphicon-thumbs-down vote" ng-click="downVote(comment)"></span></li>
+	</ul>
+	<span style="font-size:20px; margin-left:10px;">
+  	{{comment.body}}
+	</span>
+</div>
+<form ng-submit="addComment()" style="margin-top:30px;">
+  <h3>Add a new comment</h3>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Comment" ng-model="body"></input>
+  </div>
+  <button type="submit" class="btn btn-primary">Post</button>
+</form>
