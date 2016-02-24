@@ -1,6 +1,22 @@
 Rails.application.routes.draw do
 
   root to: 'application#angular'
+
+  resources :posts do
+    resources :comments, only: [:create, :show] do
+      member do
+        put '/upvote' => 'comments#upvote'
+        put '/downvote' => 'comments#downvote'
+      end
+    end
+
+    member do
+      put '/upvote' => 'posts#upvote'
+      put '/downvote' => 'posts#downvote'
+    end
+  end
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
